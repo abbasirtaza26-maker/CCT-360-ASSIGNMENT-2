@@ -16,13 +16,14 @@ let soundOn = false;
 
 rumble.volume = 0.2;
 
+// ---------- BUTTONS ----------
 function chooseFeed(number) {
   alertSound.currentTime = 0;
   alertSound.play();
   loadQuakes(number);
 }
 
-
+// ---------- GET THE LIVE DATA ----------
 function loadQuakes(number) {
   headline.textContent = "Listening to the Earth...";
   fetch(urls[number])
@@ -33,7 +34,7 @@ function loadQuakes(number) {
     });
 }
 
-
+// ---------- LET THE DATA BUILD THE PAGE ----------
 function showQuakes(data) {
   quakes = data.features;
   dots.innerHTML = "";
@@ -54,8 +55,8 @@ function showQuakes(data) {
       biggestIndex = i;
     }
 
-    
-    let size = 6 + mag * 4;
+    // position, size and colour all come from the data
+    let size = 4 + mag * 2;
     let colour = "#7fdbff";
     if (mag >= 6) {
       colour = "#ffffff";
@@ -80,13 +81,13 @@ function showQuakes(data) {
     dots.appendChild(dot);
   }
 
- 
+  // the biggest quake sets the headline, the page colour and the rumble volume
   if (biggestIndex === -1) {
     headline.textContent = "The Earth is quiet. No earthquakes in this time range.";
     document.body.style.backgroundColor = "#080c1a";
     rumble.volume = 0.1;
   } else {
-    headline.textContent = quakes.length + " earthquakes. The biggest was M" + biggest + " near " + quakes[biggestIndex].properties.place + ".";
+    headline.textContent = quakes.length + " earthquakes. The biggest was M" + biggest + ", " + quakes[biggestIndex].properties.place + ".";
 
     if (biggest < 4) {
       document.body.style.backgroundColor = "#080c1a";
@@ -102,7 +103,7 @@ function showQuakes(data) {
   }
 }
 
-
+// ---------- CLICK A DOT ----------
 function showQuake(index) {
   let mag = quakes[index].properties.mag;
   let depth = quakes[index].geometry.coordinates[2];
@@ -116,7 +117,7 @@ function showQuake(index) {
   ping.play();
 }
 
-
+// ---------- RUMBLE BUTTON ----------
 function toggleSound() {
   if (soundOn === false) {
     rumble.play();
