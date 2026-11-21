@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Earth Tremors</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Earth Tremors</h1>
+<p>Earthquakes around the world, live from the USGS. A bigger quake makes a bigger, hotter dot. Click a dot.</p>
+
+<div id="feeds">
+  <button onclick="chooseFeed(0)">Past hour</button>
+  <button onclick="chooseFeed(1)">Past day</button>
+  <button onclick="chooseFeed(2)">Past week (M4.5 and up)</button>
+</div>
+
+<div id="map">
+  <img id="mapImage" src="images/image1.jpg" alt="World map">
+  <div id="dots"></div>
+</div>
+
+<p id="headline">Listening to the Earth...</p>
+<p id="details">Click a dot on the map to see that earthquake.</p>
+
+<button id="soundButton" onclick="toggleSound()">Play rumble</button>
+
+<audio id="rumble" src="audio/audio2.mp3" loop></audio>
+<audio id="ping" src="audio/audio3.mp3"></audio>
+<audio id="alert" src="audio/audio1.mp3"></audio>
+
+<script src="script.js"></script>
+</body>
+</html>
